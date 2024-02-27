@@ -1,0 +1,39 @@
+ To Dockerize the given Python code, you can follow these steps:
+
+1. Create a new directory and save the Python code in a file named `loan_management_system.py`.
+2. Create a `requirements.txt` file in the same directory with the following content:
+```
+pandas
+openpyxl
+```
+3. Create a `Dockerfile` in the same directory with the following content:
+```sql
+FROM python:3.9
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt
+
+COPY loan_management_system.py /app
+
+CMD ["python", "loan_management_system.py"]
+```
+4. Create a `docker-compose.yml` file in the same directory with the following content:
+```yaml
+version: '3.8'
+
+services:
+  loan_management_system:
+    build: .
+    volumes:
+      - .:/app
+```
+5. Run the following command in the terminal to build and run the Docker container:
+```
+docker-compose up
+```
+This will build the Docker image and run the container. The Python code will be executed inside the container and will print the output to the console.
+
+Note: The `customer_id`, `loan_amount`, `interest_rate`, `tenure`, and `monthly_income` variables are not defined in the provided code, so you will need to provide their values in order to test the `create_loan` method.
